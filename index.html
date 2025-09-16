@@ -5,72 +5,106 @@
 <meta http-equiv="refresh" content="3; url=https://www.drakozz.com/">
 <title>Redirecionando...</title>
 <style>
+  /* Reset e fundo */
   body {
     margin: 0;
     padding: 0;
     height: 100vh;
+    overflow: hidden;
+    background: #000;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #000;
-    overflow: hidden;
+    flex-direction: column;
     font-family: 'Arial', sans-serif;
     color: #00ffff;
-    flex-direction: column;
+    text-align: center;
     position: relative;
-  }
-
-  /* Criando múltiplas chamas */
-  .flame {
-    position: absolute;
-    bottom: 0;
-    width: 20px;
-    height: 60px;
-    background: radial-gradient(circle, rgba(0,191,255,0.7) 0%, transparent 70%);
-    animation: flicker 1s infinite alternate;
-    opacity: 0.6;
-  }
-
-  .flame:nth-child(1) { left: 20%; animation-delay: 0s; }
-  .flame:nth-child(2) { left: 40%; animation-delay: 0.2s; }
-  .flame:nth-child(3) { left: 60%; animation-delay: 0.4s; }
-  .flame:nth-child(4) { left: 80%; animation-delay: 0.6s; }
-
-  @keyframes flicker {
-    0% { transform: scaleY(1); opacity: 0.6; }
-    50% { transform: scaleY(1.5) translateY(-10px); opacity: 0.9; }
-    100% { transform: scaleY(1) translateY(0); opacity: 0.6; }
   }
 
   /* Logo central */
   .logo {
-    width: 180px; /* ajuste se necessário */
+    width: 180px;
     z-index: 2;
     margin-bottom: 20px;
+    filter: drop-shadow(0 0 10px #00ffff);
   }
 
   /* Texto */
   .text {
     font-size: 1.5rem;
-    text-align: center;
     z-index: 2;
+    text-shadow: 0 0 8px #00ffff;
+  }
+
+  /* Contêiner das chamas */
+  .flames-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  /* Cada chama */
+  .flame {
+    position: absolute;
+    bottom: 0;
+    width: 10px;
+    height: 60px;
+    background: radial-gradient(circle, rgba(0,191,255,0.7) 0%, transparent 70%);
+    opacity: 0.7;
+    animation: flameMove linear infinite;
+    filter: blur(2px);
+  }
+
+  /* Animação das chamas */
+  @keyframes flameMove {
+    0% {
+      transform: translateY(0) scaleX(1);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translateY(-80px) scaleX(1.2);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-150px) scaleX(0.8);
+      opacity: 0;
+    }
   }
 </style>
 </head>
 <body>
 
-  <!-- Quatro chamas animadas -->
-  <div class="flame"></div>
-  <div class="flame"></div>
-  <div class="flame"></div>
-  <div class="flame"></div>
+  <!-- Chamas animadas -->
+  <div class="flames-container" id="flames"></div>
 
-  <!-- Coloque seu logo no mesmo diretório e descomente abaixo -->
+  <!-- Logo -->
   <!-- <img src="logo.png" alt="Logo" class="logo"> -->
 
+  <!-- Texto -->
   <div class="text">
     Redirecionando para<br>
     <strong>www.drakozz.com</strong>...
   </div>
+
+<script>
+  // Criar várias chamas com posições e tempos aleatórios
+  const flamesContainer = document.getElementById('flames');
+  const flameCount = 30;
+
+  for (let i = 0; i < flameCount; i++) {
+    const flame = document.createElement('div');
+    flame.classList.add('flame');
+    flame.style.left = Math.random() * 100 + '%';
+    flame.style.animationDuration = (1 + Math.random() * 2) + 's';
+    flame.style.height = (40 + Math.random() * 60) + 'px';
+    flame.style.width = (5 + Math.random() * 10) + 'px';
+    flamesContainer.appendChild(flame);
+  }
+</script>
 </body>
 </html>
