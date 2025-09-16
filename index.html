@@ -2,9 +2,10 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="2; url=https://www.drakozz.com/">
+<meta http-equiv="refresh" content="3; url=https://www.drakozz.com/">
 <title>Redirecionando...</title>
 <style>
+  /* Fundo preto e centralização */
   body {
     margin: 0;
     padding: 0;
@@ -12,24 +13,55 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #000; /* Fundo preto */
-    color: #00ffff; /* Cor do texto (azul neon) */
+    background: #000;
+    overflow: hidden;
     font-family: 'Arial', sans-serif;
-    text-align: center;
+    color: #00ffff;
     flex-direction: column;
   }
-  .logo {
-    width: 200px; /* Se tiver logo, ajuste aqui */
-    margin-bottom: 30px;
+
+  /* Chamas animadas */
+  .flame {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: radial-gradient(circle, rgba(0,191,255,0.3) 0%, transparent 70%);
+    animation: flameMove 3s infinite alternate;
+    mix-blend-mode: screen;
   }
-  p {
+
+  @keyframes flameMove {
+    0% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.1) rotate(5deg); }
+    100% { transform: scale(1) rotate(-5deg); }
+  }
+
+  /* Logo central */
+  .logo {
+    width: 180px; /* ajuste se necessário */
+    z-index: 2;
+    margin-bottom: 20px;
+  }
+
+  /* Texto */
+  .text {
     font-size: 1.5rem;
+    text-align: center;
+    z-index: 2;
   }
 </style>
 </head>
 <body>
-  <!-- Se tiver logo, descomente a linha abaixo e coloque o nome do arquivo -->
+  <div class="flame"></div>
+
+  <!-- Coloque seu logo no mesmo diretório e descomente abaixo -->
   <!-- <img src="logo.png" alt="Logo" class="logo"> -->
-  <p>Redirecionando para<br><strong>www.drakozz.com</strong>...</p>
+
+  <div class="text">
+    Redirecionando para<br>
+    <strong>www.drakozz.com</strong>...
+  </div>
 </body>
 </html>
